@@ -2,15 +2,10 @@ namespace PerfectDecimal_test
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void Test1()
+        public void EmptyConstructorCreatesOne()
         {
-            Assert.Pass();
+            PerfectDecimal subject = new();
         }
     }
 }
