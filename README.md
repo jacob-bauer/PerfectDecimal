@@ -6,3 +6,8 @@ Using a ratio of two integer types also allows `PerfectDecimal` to correctly rep
 point types.
 
 In other words, `PerfectDecimal` has (theoretically) infinite precision and scale.
+
+Current goals are for the project:
+- Infinite precision and scale
+- Good-enough testing
+- Support for Generic Math interfaces
