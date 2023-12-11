@@ -1,6 +1,6 @@
 namespace PerfectDecimal_test
 {
-    public class Tests
+    public class ConstructorTests
     {
         [Test]
         public void EmptyConstructorCreatesOne()
