@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace PerfectDecimal
+namespace ExtendedNumerics
 {
     public class PerfectDecimal
     {

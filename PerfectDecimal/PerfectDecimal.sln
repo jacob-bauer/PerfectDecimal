@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectDecimal", "PerfectDecimal\PerfectDecimal.csproj", "{316EF114-0E6F-4AEC-9EFD-172B9E752046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectDecimal", "PerfectDecimal\PerfectDecimal.csproj", "{316EF114-0E6F-4AEC-9EFD-172B9E752046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectDecimal-test", "PerfectDecimal-test\PerfectDecimal-test.csproj", "{D1D51346-08CC-4151-98E9-48101388E40A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{316EF114-0E6F-4AEC-9EFD-172B9E752046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{316EF114-0E6F-4AEC-9EFD-172B9E752046}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{316EF114-0E6F-4AEC-9EFD-172B9E752046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D51346-08CC-4151-98E9-48101388E40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D51346-08CC-4151-98E9-48101388E40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D51346-08CC-4151-98E9-48101388E40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D51346-08CC-4151-98E9-48101388E40A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
