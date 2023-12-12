@@ -45,6 +45,11 @@ namespace ExtendedNumerics
 
         public override int GetHashCode()
         {
+            // Since this has to return the same hashcode for
+            // objects that may have different numerators and denominators
+            // but which are actually equal in value, and we don't have
+            // a reference to another PerfectDecimal to compare to
+            // we must reduce the fraction before generating the hashcode
 
         }
 
