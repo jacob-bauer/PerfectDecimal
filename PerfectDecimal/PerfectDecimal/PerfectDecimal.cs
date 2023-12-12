@@ -65,14 +65,12 @@ namespace ExtendedNumerics
         {
             if (value is PerfectDecimal perfectDecimal)
             {
-                // make fractions like then compare
-                BigInteger myNumerator = _numerator * perfectDecimal._denominator;
-                BigInteger objNumerator = perfectDecimal._numerator * _denominator;
+                var numerators = MakeLike(this, perfectDecimal);
 
-                if (myNumerator < objNumerator)
+                if (numerators.leftNumerator < numerators.rightNumerator)
                     return -1;
 
-                else if (myNumerator == objNumerator)
+                else if (numerators.leftNumerator == numerators.rightNumerator)
                     return 0;
 
                 else
@@ -90,17 +88,15 @@ namespace ExtendedNumerics
         {
             if (value is not null)
             {
-                BigInteger myNumerator = _numerator * value._denominator;
-                BigInteger valueNumerator = value._numerator * _denominator;
+                var numerators = MakeLike(this, value);
 
-                if (myNumerator < valueNumerator)
+                if (numerators.leftNumerator < numerators.rightNumerator)
                     return -1;
 
-                else if (myNumerator == valueNumerator)
+                else if (numerators.leftNumerator == numerators.rightNumerator)
                     return 0;
 
-                else
-                    return 1;
+                else return 1;
             }
 
             else
@@ -109,44 +105,39 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator * right._denominator;
-            BigInteger rightNumerator = right._numerator * left._denominator;
+            var numerators = MakeLike(left, right);
 
-            return leftNumerator < rightNumerator;
+            return numerators.leftNumerator < numerators.rightNumerator;
         }
 
         public static bool operator >(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left.Numerator * right.Denominator;
-            BigInteger rightNumerator = right.Numerator * left.Denominator;
+            var numerators = MakeLike(left, right);
 
-            return leftNumerator > rightNumerator;
+            return numerators.leftNumerator > numerators.rightNumerator;
         }
 
         public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left.Numerator * right.Denominator;
-            BigInteger rightNumerator = right.Numerator * left.Denominator;
+            var numerators = MakeLike(left, right);
 
-            return leftNumerator <= rightNumerator;
+            return numerators.leftNumerator <= numerators.rightNumerator;
         }
 
         public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left.Numerator * right.Denominator;
-            BigInteger rightNumerator = right.Numerator * left.Denominator;
+            var numerators = MakeLike(left, right);
 
-            return leftNumerator >= rightNumerator;
+            return numerators.leftNumerator >= numerators.rightNumerator;
         }
 
         public static bool operator ==(PerfectDecimal? left, PerfectDecimal? right)
         {
             if (left is not null && right is not null)
             {
-                BigInteger leftNumerator = left.Numerator * right.Denominator;
-                BigInteger rightNumerator = right.Numerator * left.Denominator;
+                var numerators = MakeLike(left, right);
 
-                return leftNumerator == rightNumerator;
+                return numerators.leftNumerator == numerators.rightNumerator;
             }
 
             else
@@ -157,10 +148,9 @@ namespace ExtendedNumerics
         {
             if (left is not null && right is not null)
             {
-                BigInteger leftNumerator = left.Numerator * right.Denominator;
-                BigInteger rightNumerator = right.Numerator * left.Denominator;
+                var numerators = MakeLike(left, right);
 
-                return leftNumerator != rightNumerator;
+                return numerators.leftNumerator != numerators.rightNumerator;
             }
 
             else
