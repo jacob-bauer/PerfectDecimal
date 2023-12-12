@@ -2,7 +2,7 @@
 
 namespace ExtendedNumerics
 {
-    public class PerfectDecimal
+    public class PerfectDecimal : IComparable
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -34,6 +34,13 @@ namespace ExtendedNumerics
                 _numerator = new BigInteger(numerator);
                 _denominator = new BigInteger(denominator);
             }
+        }
+
+        public int CompareTo(object? obj)
+        {
+            // Make fractions like
+
+            // Compare Numerators
         }
     }
 }
