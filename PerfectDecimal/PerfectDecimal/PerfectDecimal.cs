@@ -2,7 +2,7 @@
 
 namespace ExtendedNumerics
 {
-    public class PerfectDecimal
+    public class PerfectDecimal : IComparable
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -18,7 +18,6 @@ namespace ExtendedNumerics
 
         public PerfectDecimal(int numerator, int denominator)
         {
-            // denominator cannot be zero
             if (denominator == 0)
             {
                 string message = $"{nameof(denominator)} is zero."
@@ -34,6 +33,31 @@ namespace ExtendedNumerics
                 _numerator = new BigInteger(numerator);
                 _denominator = new BigInteger(denominator);
             }
+        }
+
+        public int CompareTo(object? value)
+        {
+            if (value is PerfectDecimal perfectDecimal)
+            {
+                // make fractions like then compare
+                BigInteger myNumerator = this._numerator * perfectDecimal.Denominator;
+                BigInteger objNumerator = perfectDecimal.Numerator * this._denominator;
+
+                if (myNumerator < objNumerator)
+                    return -1;
+
+                else if (myNumerator == objNumerator)
+                    return 0;
+
+                else
+                    return 1;
+            }
+
+            else if (value is null)
+                return 1;
+
+            else
+                throw new ArgumentException($"Object must be of type {nameof(PerfectDecimal)}.");
         }
     }
 }
