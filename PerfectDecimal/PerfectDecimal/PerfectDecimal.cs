@@ -11,9 +11,6 @@ namespace ExtendedNumerics
         private BigInteger _numerator;
         private BigInteger _denominator;
 
-        public BigInteger Numerator { get => _numerator; }
-        public BigInteger Denominator { get => _denominator; }
-
         public PerfectDecimal()
         {
             _numerator = BigInteger.Zero;
@@ -69,8 +66,8 @@ namespace ExtendedNumerics
             if (value is PerfectDecimal perfectDecimal)
             {
                 // make fractions like then compare
-                BigInteger myNumerator = _numerator * perfectDecimal.Denominator;
-                BigInteger objNumerator = perfectDecimal.Numerator * _denominator;
+                BigInteger myNumerator = _numerator * perfectDecimal._denominator;
+                BigInteger objNumerator = perfectDecimal._numerator * _denominator;
 
                 if (myNumerator < objNumerator)
                     return -1;
@@ -93,8 +90,8 @@ namespace ExtendedNumerics
         {
             if (value is not null)
             {
-                BigInteger myNumerator = _numerator * value.Denominator;
-                BigInteger valueNumerator = value.Numerator * _denominator;
+                BigInteger myNumerator = _numerator * value._denominator;
+                BigInteger valueNumerator = value._numerator * _denominator;
 
                 if (myNumerator < valueNumerator)
                     return -1;
@@ -112,8 +109,8 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left.Numerator * right.Denominator;
-            BigInteger rightNumerator = right.Numerator * left.Denominator;
+            BigInteger leftNumerator = left._numerator * right._denominator;
+            BigInteger rightNumerator = right._numerator * left._denominator;
 
             return leftNumerator < rightNumerator;
         }
@@ -168,6 +165,14 @@ namespace ExtendedNumerics
 
             else
                 return false;
+        }
+
+        private (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left._numerator * right._denominator;
+            BigInteger rightNumerator = right._numerator * left._denominator;
+
+            return (leftNumerator, rightNumerator);
         }
     }
 }
