@@ -16,10 +16,13 @@ namespace ExtendedNumerics
             _denominator = BigInteger.One;
         }
 
-        public PerfectDecimal(int numerator, int denominator)
+        public PerfectDecimal(int numerator, int denominator) : this(new BigInteger(numerator), new BigInteger(denominator))
         {
-            // denominator cannot be zero
-            if (denominator == 0)
+        }
+
+        public PerfectDecimal(BigInteger numerator, BigInteger denominator)
+        {
+            if (denominator == BigInteger.Zero)
             {
                 string message = $"{nameof(denominator)} is zero."
                                + $" A {nameof(PerfectDecimal)} is a fraction of the form numerator / denominator."
@@ -31,9 +34,9 @@ namespace ExtendedNumerics
 
             else
             {
-                _numerator = new BigInteger(numerator);
-                _denominator = new BigInteger(denominator);
-            }
+                _numerator = numerator;
+                _denominator = denominator;
+            }    
         }
 
         public int CompareTo(object? obj)
