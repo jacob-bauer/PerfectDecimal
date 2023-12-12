@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
-    internal class ObjectOverrideTests
+    internal class ObjectGetHashCodeTests
     {
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertion", "NUnit2009:The same value has been provided as both the actual and the expected argument", Justification = "Object.GetHashCode should return the same value if called mutliple times for the same object.")]
