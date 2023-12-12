@@ -106,28 +106,24 @@ namespace ExtendedNumerics
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
             var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
             return leftNumerator < rightNumerator;
         }
 
         public static bool operator >(PerfectDecimal left, PerfectDecimal right)
         {
             var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
             return leftNumerator > rightNumerator;
         }
 
         public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
         {
             var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
             return leftNumerator <= rightNumerator;
         }
 
         public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
         {
             var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
             return leftNumerator >= rightNumerator;
         }
 
@@ -136,7 +132,6 @@ namespace ExtendedNumerics
             if (left is not null && right is not null)
             {
                 var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
                 return leftNumerator == rightNumerator;
             }
 
@@ -149,7 +144,6 @@ namespace ExtendedNumerics
             if (left is not null && right is not null)
             {
                 var (leftNumerator, rightNumerator) = MakeLike(left, right);
-
                 return leftNumerator != rightNumerator;
             }
 
