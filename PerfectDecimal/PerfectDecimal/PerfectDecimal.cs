@@ -2,7 +2,7 @@
 
 namespace ExtendedNumerics
 {
-    public class PerfectDecimal : IComparable
+    public class PerfectDecimal : IComparable, IComparable<PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -58,6 +58,21 @@ namespace ExtendedNumerics
 
             else
                 throw new ArgumentException($"Object must be of type {nameof(PerfectDecimal)}.");
+        }
+
+        public int CompareTo(PerfectDecimal value)
+        {
+            BigInteger myNumerator = _numerator * value.Denominator;
+            BigInteger valueNumerator = value.Numerator * _denominator;
+
+            if (myNumerator < valueNumerator)
+                return -1;
+
+            else if (myNumerator == valueNumerator)
+                return 0;
+
+            else
+                return 1;
         }
     }
 }
