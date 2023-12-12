@@ -40,8 +40,8 @@ namespace ExtendedNumerics
             if (value is PerfectDecimal perfectDecimal)
             {
                 // make fractions like then compare
-                BigInteger myNumerator = this._numerator * perfectDecimal.Denominator;
-                BigInteger objNumerator = perfectDecimal.Numerator * this._denominator;
+                BigInteger myNumerator = _numerator * perfectDecimal.Denominator;
+                BigInteger objNumerator = perfectDecimal.Numerator * _denominator;
 
                 if (myNumerator < objNumerator)
                     return -1;
