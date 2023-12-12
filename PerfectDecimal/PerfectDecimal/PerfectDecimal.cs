@@ -50,7 +50,12 @@ namespace ExtendedNumerics
             // but which are actually equal in value, and we don't have
             // a reference to another PerfectDecimal to compare to
             // we must reduce the fraction before generating the hashcode
+            BigInteger gcd = BigInteger.GreatestCommonDivisor(_numerator, _denominator);
 
+            BigInteger numerator = _numerator / gcd;
+            BigInteger denominator = _denominator / gcd;
+
+            return HashCode.Combine(numerator, denominator);
         }
 
         public int CompareTo(object? value)
