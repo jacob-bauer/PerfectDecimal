@@ -42,5 +42,15 @@ namespace ExtendedNumerics
 
             // Compare Numerators
         }
+
+        public PerfectDecimal Reduce()
+        {
+            BigInteger gcd = BigInteger.GreatestCommonDivisor(_numerator, _denominator);
+
+            BigInteger numerator = _numerator / gcd;
+            BigInteger denominator = _denominator / gcd;
+
+            return new PerfectDecimal(numerator, denominator);
+        }
     }
 }
