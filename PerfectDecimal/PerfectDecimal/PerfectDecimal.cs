@@ -65,12 +65,12 @@ namespace ExtendedNumerics
         {
             if (value is PerfectDecimal perfectDecimal)
             {
-                var numerators = MakeLike(this, perfectDecimal);
+                var (leftNumerator, rightNumerator) = MakeLike(this, perfectDecimal);
 
-                if (numerators.leftNumerator < numerators.rightNumerator)
+                if (leftNumerator < rightNumerator)
                     return -1;
 
-                else if (numerators.leftNumerator == numerators.rightNumerator)
+                else if (leftNumerator == rightNumerator)
                     return 0;
 
                 else
@@ -88,12 +88,12 @@ namespace ExtendedNumerics
         {
             if (value is not null)
             {
-                var numerators = MakeLike(this, value);
+                var (leftNumerator, rightNumerator) = MakeLike(this, value);
 
-                if (numerators.leftNumerator < numerators.rightNumerator)
+                if (leftNumerator < rightNumerator)
                     return -1;
 
-                else if (numerators.leftNumerator == numerators.rightNumerator)
+                else if (leftNumerator == rightNumerator)
                     return 0;
 
                 else return 1;
@@ -105,39 +105,39 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            var numerators = MakeLike(left, right);
+            var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-            return numerators.leftNumerator < numerators.rightNumerator;
+            return leftNumerator < rightNumerator;
         }
 
         public static bool operator >(PerfectDecimal left, PerfectDecimal right)
         {
-            var numerators = MakeLike(left, right);
+            var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-            return numerators.leftNumerator > numerators.rightNumerator;
+            return leftNumerator > rightNumerator;
         }
 
         public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
         {
-            var numerators = MakeLike(left, right);
+            var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-            return numerators.leftNumerator <= numerators.rightNumerator;
+            return leftNumerator <= rightNumerator;
         }
 
         public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
         {
-            var numerators = MakeLike(left, right);
+            var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-            return numerators.leftNumerator >= numerators.rightNumerator;
+            return leftNumerator >= rightNumerator;
         }
 
         public static bool operator ==(PerfectDecimal? left, PerfectDecimal? right)
         {
             if (left is not null && right is not null)
             {
-                var numerators = MakeLike(left, right);
+                var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-                return numerators.leftNumerator == numerators.rightNumerator;
+                return leftNumerator == rightNumerator;
             }
 
             else
@@ -148,9 +148,9 @@ namespace ExtendedNumerics
         {
             if (left is not null && right is not null)
             {
-                var numerators = MakeLike(left, right);
+                var (leftNumerator, rightNumerator) = MakeLike(left, right);
 
-                return numerators.leftNumerator != numerators.rightNumerator;
+                return leftNumerator != rightNumerator;
             }
 
             else
