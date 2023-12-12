@@ -5,7 +5,8 @@ namespace ExtendedNumerics
     public class PerfectDecimal : IComparable,
                                   IComparable<PerfectDecimal>,
                                   IComparisonOperators<PerfectDecimal, PerfectDecimal, bool>,
-                                  IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>
+                                  IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
+                                  IEquatable<PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -39,6 +40,11 @@ namespace ExtendedNumerics
         }
 
         public override bool Equals(object? value)
+        {
+            return value is PerfectDecimal other && CompareTo(other) == 0;
+        }
+
+        public bool Equals(PerfectDecimal? value)
         {
             return value is PerfectDecimal other && CompareTo(other) == 0;
         }
