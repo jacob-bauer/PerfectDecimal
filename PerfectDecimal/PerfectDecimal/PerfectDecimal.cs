@@ -89,16 +89,22 @@ namespace ExtendedNumerics
                 throw new ArgumentException($"Object must be of type {nameof(PerfectDecimal)}.");
         }
 
-        public int CompareTo(PerfectDecimal value)
+        public int CompareTo(PerfectDecimal? value)
         {
-            BigInteger myNumerator = _numerator * value.Denominator;
-            BigInteger valueNumerator = value.Numerator * _denominator;
+            if (value is not null)
+            {
+                BigInteger myNumerator = _numerator * value.Denominator;
+                BigInteger valueNumerator = value.Numerator * _denominator;
 
-            if (myNumerator < valueNumerator)
-                return -1;
+                if (myNumerator < valueNumerator)
+                    return -1;
 
-            else if (myNumerator == valueNumerator)
-                return 0;
+                else if (myNumerator == valueNumerator)
+                    return 0;
+
+                else
+                    return 1;
+            }
 
             else
                 return 1;

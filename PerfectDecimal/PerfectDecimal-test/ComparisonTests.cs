@@ -9,6 +9,15 @@ namespace PerfectDecimal_test
     internal class IComparableOfTTests
     {
         [Test]
+        public void Object_Is_Null()
+        {
+            PerfectDecimal subject = new(0, 1);
+            PerfectDecimal? test = null;
+
+            Assert.That(subject.CompareTo(test), Is.EqualTo(1));
+        }
+
+        [Test]
         public void Equal_Not_Reduced_Positive_Fraction()
         {
             PerfectDecimal subject = new(1, 2);
