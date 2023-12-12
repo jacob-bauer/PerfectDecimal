@@ -40,7 +40,7 @@ namespace ExtendedNumerics
 
         public override bool Equals(object? value)
         {
-            return value is decimal other && CompareTo(other) == 0;
+            return value is PerfectDecimal other && CompareTo(other) == 0;
         }
 
         public int CompareTo(object? value)
