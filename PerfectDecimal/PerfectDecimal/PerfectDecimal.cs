@@ -39,11 +39,29 @@ namespace ExtendedNumerics
             }    
         }
 
-        public int CompareTo(object? obj)
+        public int CompareTo(object? value)
         {
-            // Make fractions like
+            if (value is PerfectDecimal perfectDecimal)
+            {
+                // make fractions like then compare
+                BigInteger myNumerator = this._numerator * perfectDecimal.Denominator;
+                BigInteger objNumerator = perfectDecimal.Numerator * this._denominator;
 
-            // Compare Numerators
+                if (myNumerator < objNumerator)
+                    return -1;
+
+                else if (myNumerator == objNumerator)
+                    return 0;
+
+                else
+                    return 1;
+            }
+
+            else if (value is null)
+                return 1;
+
+            else
+                throw new ArgumentException($"Object must be of type {nameof(PerfectDecimal)}.");
         }
 
         public PerfectDecimal Reduce()
