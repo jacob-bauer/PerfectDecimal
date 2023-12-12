@@ -2,7 +2,11 @@
 
 namespace ExtendedNumerics
 {
-    public class PerfectDecimal : IComparable, IComparable<PerfectDecimal>
+    public class PerfectDecimal : IComparable,
+                                  IComparable<PerfectDecimal>,
+                                  IComparisonOperators<PerfectDecimal, PerfectDecimal, bool>,
+                                  IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
+                                  IEquatable<PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -33,6 +37,31 @@ namespace ExtendedNumerics
                 _numerator = new BigInteger(numerator);
                 _denominator = new BigInteger(denominator);
             }
+        }
+
+        public override bool Equals(object? value)
+        {
+            return value is PerfectDecimal other && CompareTo(other) == 0;
+        }
+
+        public bool Equals(PerfectDecimal? value)
+        {
+            return value is PerfectDecimal other && CompareTo(other) == 0;
+        }
+
+        public override int GetHashCode()
+        {
+            // Since this has to return the same hashcode for
+            // objects that may have different numerators and denominators
+            // but which are actually equal in value, and we don't have
+            // a reference to another PerfectDecimal to compare to
+            // we must reduce the fraction before generating the hashcode
+            BigInteger gcd = BigInteger.GreatestCommonDivisor(_numerator, _denominator);
+
+            BigInteger numerator = _numerator / gcd;
+            BigInteger denominator = _denominator / gcd;
+
+            return HashCode.Combine(numerator, denominator);
         }
 
         public int CompareTo(object? value)
@@ -73,6 +102,54 @@ namespace ExtendedNumerics
 
             else
                 return 1;
+        }
+
+        public static bool operator <(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator < rightNumerator;
+        }
+
+        public static bool operator >(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator > rightNumerator;
+        }
+
+        public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator <= rightNumerator;
+        }
+
+        public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator >= rightNumerator;
+        }
+
+        public static bool operator ==(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator == rightNumerator;
+        }
+
+        public static bool operator !=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator != rightNumerator;
         }
     }
 }
