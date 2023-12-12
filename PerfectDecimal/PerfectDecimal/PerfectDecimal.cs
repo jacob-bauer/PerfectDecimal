@@ -2,7 +2,10 @@
 
 namespace ExtendedNumerics
 {
-    public class PerfectDecimal : IComparable, IComparable<PerfectDecimal>
+    public class PerfectDecimal : IComparable,
+                                  IComparable<PerfectDecimal>,
+                                  IComparisonOperators<PerfectDecimal, PerfectDecimal, bool>,
+                                  IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -73,6 +76,54 @@ namespace ExtendedNumerics
 
             else
                 return 1;
+        }
+
+        public static bool operator <(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator < rightNumerator;
+        }
+
+        public static bool operator >(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator > rightNumerator;
+        }
+
+        public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator <= rightNumerator;
+        }
+
+        public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator >= rightNumerator;
+        }
+
+        public static bool operator ==(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator == rightNumerator;
+        }
+
+        public static bool operator !=(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left.Numerator * right.Denominator;
+            BigInteger rightNumerator = right.Numerator * left.Denominator;
+
+            return leftNumerator != rightNumerator;
         }
     }
 }
