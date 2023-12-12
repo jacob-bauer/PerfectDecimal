@@ -43,6 +43,11 @@ namespace ExtendedNumerics
             return value is PerfectDecimal other && CompareTo(other) == 0;
         }
 
+        public override int GetHashCode()
+        {
+
+        }
+
         public int CompareTo(object? value)
         {
             if (value is PerfectDecimal perfectDecimal)
