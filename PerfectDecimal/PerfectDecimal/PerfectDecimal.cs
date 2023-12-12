@@ -16,13 +16,9 @@ namespace ExtendedNumerics
             _denominator = BigInteger.One;
         }
 
-        public PerfectDecimal(int numerator, int denominator) : this(new BigInteger(numerator), new BigInteger(denominator))
+        public PerfectDecimal(int numerator, int denominator)
         {
-        }
-
-        public PerfectDecimal(BigInteger numerator, BigInteger denominator)
-        {
-            if (denominator == BigInteger.Zero)
+            if (denominator == 0)
             {
                 string message = $"{nameof(denominator)} is zero."
                                + $" A {nameof(PerfectDecimal)} is a fraction of the form numerator / denominator."
@@ -34,9 +30,9 @@ namespace ExtendedNumerics
 
             else
             {
-                _numerator = numerator;
-                _denominator = denominator;
-            }    
+                _numerator = new BigInteger(numerator);
+                _denominator = new BigInteger(denominator);
+            }
         }
 
         public int CompareTo(object? value)
@@ -62,16 +58,6 @@ namespace ExtendedNumerics
 
             else
                 throw new ArgumentException($"Object must be of type {nameof(PerfectDecimal)}.");
-        }
-
-        public PerfectDecimal Reduce()
-        {
-            BigInteger gcd = BigInteger.GreatestCommonDivisor(_numerator, _denominator);
-
-            BigInteger numerator = _numerator / gcd;
-            BigInteger denominator = _denominator / gcd;
-
-            return new PerfectDecimal(numerator, denominator);
         }
     }
 }
