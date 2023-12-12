@@ -156,12 +156,18 @@ namespace ExtendedNumerics
                 return false;
         }
 
-        public static bool operator !=(PerfectDecimal left, PerfectDecimal right)
+        public static bool operator !=(PerfectDecimal? left, PerfectDecimal? right)
         {
-            BigInteger leftNumerator = left.Numerator * right.Denominator;
-            BigInteger rightNumerator = right.Numerator * left.Denominator;
+            if (left is not null && right is not null)
+            {
+                BigInteger leftNumerator = left.Numerator * right.Denominator;
+                BigInteger rightNumerator = right.Numerator * left.Denominator;
 
-            return leftNumerator != rightNumerator;
+                return leftNumerator != rightNumerator;
+            }
+
+            else
+                return false;
         }
     }
 }
