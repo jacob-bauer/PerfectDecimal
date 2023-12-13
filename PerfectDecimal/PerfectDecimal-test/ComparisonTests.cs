@@ -85,7 +85,7 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Denominator_Less_Than_Negative()
         {
-            PerfectDecimal subject = new(408, -504);
+            PerfectDecimal subject = new(400, -504);
             PerfectDecimal test = new(-400, 600);
 
             Assert.That(subject <= test, Is.True);
@@ -94,8 +94,8 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Less_Than_Negative_Both()
         {
-            PerfectDecimal subject = new(-1, -2);
-            PerfectDecimal test = new(-1, -6);
+            PerfectDecimal subject = new(-1, -6);
+            PerfectDecimal test = new(-1, -2);
 
             Assert.That(subject <= test, Is.True);
         }
@@ -215,7 +215,7 @@ namespace PerfectDecimal_test
         public void Negative_Denominator_Greater_Than_Negative()
         {
             PerfectDecimal subject = new(1, -8);
-            PerfectDecimal test = new(-1, 7054);
+            PerfectDecimal test = new(-1, 6);
 
             Assert.That(subject >= test, Is.True);
         }
@@ -223,8 +223,8 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Greater_Than_Negative_Both()
         {
-            PerfectDecimal subject = new(-1, -3);
-            PerfectDecimal test = new(-9, -8);
+            PerfectDecimal subject = new(-9, -8);
+            PerfectDecimal test = new(-1, -3);
 
             Assert.That(subject >= test, Is.True);
         }
@@ -400,8 +400,8 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Less_Than_Negative_Both()
         {
-            PerfectDecimal subject = new(-1, -2);
-            PerfectDecimal test = new(-1, -4);
+            PerfectDecimal subject = new(-1, -4);
+            PerfectDecimal test = new(-1, -2);
 
             Assert.That(subject < test, Is.True);
         }

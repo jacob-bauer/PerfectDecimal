@@ -105,26 +105,26 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            var (leftNumerator, rightNumerator) = MakeLike(left, right);
-            return leftNumerator < rightNumerator;
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
+            return (leftNumerator * rightDenominator) < (rightNumerator * leftDenominator);
         }
 
         public static bool operator >(PerfectDecimal left, PerfectDecimal right)
         {
-            var (leftNumerator, rightNumerator) = MakeLike(left, right);
-            return leftNumerator > rightNumerator;
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
+            return (leftNumerator * rightDenominator) > (rightNumerator * leftDenominator);
         }
 
         public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
         {
-            var (leftNumerator, rightNumerator) = MakeLike(left, right);
-            return leftNumerator <= rightNumerator;
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
+            return (leftNumerator * rightDenominator) <= (rightNumerator * leftDenominator);
         }
 
         public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
         {
-            var (leftNumerator, rightNumerator) = MakeLike(left, right);
-            return leftNumerator >= rightNumerator;
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
+            return (leftNumerator * rightDenominator) >= (rightNumerator * leftDenominator);
         }
 
         public static bool operator ==(PerfectDecimal? left, PerfectDecimal? right)
@@ -154,6 +154,28 @@ namespace ExtendedNumerics
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right)
         {
             return (left._numerator * right._denominator, right._numerator * left._denominator);
+        }
+
+        private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left._numerator;
+            BigInteger rightNumerator = right._numerator;
+            BigInteger leftDenominator = left._denominator;
+            BigInteger rightDenominator = right._denominator;
+
+            if (leftDenominator.Sign == -1)
+            {
+                leftNumerator = -leftNumerator;
+                leftDenominator = -leftDenominator;
+            }
+
+            if (rightDenominator.Sign == -1)
+            {
+                rightNumerator = -rightNumerator;
+                rightDenominator = -rightDenominator;
+            }
+
+            return (leftNumerator, rightNumerator, leftDenominator, rightDenominator);
         }
     }
 }
