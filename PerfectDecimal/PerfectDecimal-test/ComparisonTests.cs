@@ -12,31 +12,55 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Equals_Negative_Both()
         {
+            PerfectDecimal subject = new(-3, -6);
+            PerfectDecimal test = new(-6, -12);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Positive_Equals_Positive()
         {
+            PerfectDecimal subject = new(5, 904);
+            PerfectDecimal test = new(5, 904);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Numerator_Equals_Negative()
         {
+            PerfectDecimal subject = new(-5, 7);
+            PerfectDecimal test = new(-5 * 3, 7 * 3);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Denominator_Equals_Negative_Numerator()
         {
+            PerfectDecimal subject = new(4, -83);
+            PerfectDecimal test = new(-4, 83);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Denominator_Equals_Negative_Denominator()
         {
+            PerfectDecimal subject = new(4, -2);
+            PerfectDecimal test = new(4, -2);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Zero_Less_Than_Equal_Zero_True()
         {
+            PerfectDecimal subject = new();
+            PerfectDecimal test = new(0, 50384);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
