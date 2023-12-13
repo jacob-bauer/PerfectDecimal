@@ -105,93 +105,25 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator;
-            BigInteger rightNumerator = right._numerator;
-            BigInteger leftDenominator = left._denominator;
-            BigInteger rightDenominator = right._denominator;
-
-            if (leftDenominator.Sign == -1)
-            {
-                leftNumerator = -leftNumerator;
-                leftDenominator = -leftDenominator;
-            }
-
-            if (rightDenominator.Sign == -1)
-            {
-                rightNumerator = -rightNumerator;
-                rightDenominator = -rightDenominator;
-
-            }
-
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
             return (leftNumerator * rightDenominator) < (rightNumerator * leftDenominator);
         }
 
         public static bool operator >(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator;
-            BigInteger rightNumerator = right._numerator;
-            BigInteger leftDenominator = left._denominator;
-            BigInteger rightDenominator = right._denominator;
-
-            if (leftDenominator.Sign == -1)
-            {
-                leftNumerator = -leftNumerator;
-                leftDenominator = -leftDenominator;
-            }
-
-            if (rightDenominator.Sign == -1)
-            {
-                rightNumerator = -rightNumerator;
-                rightDenominator = -rightDenominator;
-
-            }
-
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
             return (leftNumerator * rightDenominator) > (rightNumerator * leftDenominator);
         }
 
         public static bool operator <=(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator;
-            BigInteger rightNumerator = right._numerator;
-            BigInteger leftDenominator = left._denominator;
-            BigInteger rightDenominator = right._denominator;
-
-            if (leftDenominator.Sign == -1)
-            {
-                leftNumerator = -leftNumerator;
-                leftDenominator = -leftDenominator;
-            }
-
-            if (rightDenominator.Sign == -1)
-            {
-                rightNumerator = -rightNumerator;
-                rightDenominator = -rightDenominator;
-
-            }
-
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
             return (leftNumerator * rightDenominator) <= (rightNumerator * leftDenominator);
         }
 
         public static bool operator >=(PerfectDecimal left, PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator;
-            BigInteger rightNumerator = right._numerator;
-            BigInteger leftDenominator = left._denominator;
-            BigInteger rightDenominator = right._denominator;
-
-            if (leftDenominator.Sign == -1)
-            {
-                leftNumerator = -leftNumerator;
-                leftDenominator = -leftDenominator;
-            }
-
-            if (rightDenominator.Sign == -1)
-            {
-                rightNumerator = -rightNumerator;
-                rightDenominator = -rightDenominator;
-
-            }
-
+            var (leftNumerator, rightNumerator, leftDenominator, rightDenominator) = MassageFractionSigns(left, right);
             return (leftNumerator * rightDenominator) >= (rightNumerator * leftDenominator);
         }
 
