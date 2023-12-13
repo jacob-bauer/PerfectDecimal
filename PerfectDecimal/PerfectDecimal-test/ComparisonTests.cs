@@ -223,8 +223,8 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Greater_Than_Negative_Both()
         {
-            PerfectDecimal subject = new(-1, -3);
-            PerfectDecimal test = new(-9, -8);
+            PerfectDecimal subject = new(-9, -8);
+            PerfectDecimal test = new(-1, -3);
 
             Assert.That(subject >= test, Is.True);
         }
