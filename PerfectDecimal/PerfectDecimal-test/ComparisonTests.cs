@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
-    internal class GreaterThanTests
+    internal class LessThanTests
     {
         [Test]
-        public void Zero_Greater_Than_Zero_False()
+        public void Zero_Less_Than_Zero_False()
         {
             PerfectDecimal subject = new();
             PerfectDecimal test = new(0, 4);
@@ -54,10 +54,10 @@ namespace PerfectDecimal_test
         }
 
         [Test]
-        public void Positive_Fraction_Smaller_Than_Whole()
+        public void Positive_Fraction_Less_Than_Whole()
         {
             PerfectDecimal subject = new(1, 7);
-            PerfectDecimal test = new(4, 9);
+            PerfectDecimal test = new(7, 7);
 
             Assert.That(subject < test, Is.True);
         }
@@ -80,6 +80,7 @@ namespace PerfectDecimal_test
             Assert.That(subject < test, Is.False);
         }
     }
+
     internal class IComparableOfTTests
     {
         [Test]
