@@ -36,15 +36,9 @@ namespace ExtendedNumerics
             }
         }
 
-        public override bool Equals(object? value)
-        {
-            return value is PerfectDecimal other && CompareTo(other) == 0;
-        }
+        public override bool Equals(object? value) => value is PerfectDecimal other && CompareTo(other) == 0;
 
-        public bool Equals(PerfectDecimal? value)
-        {
-            return value is PerfectDecimal other && CompareTo(other) == 0;
-        }
+        public bool Equals(PerfectDecimal? value) => value is PerfectDecimal other && CompareTo(other) == 0;
 
         public override int GetHashCode()
         {
@@ -151,10 +145,7 @@ namespace ExtendedNumerics
                 return false;
         }
 
-        private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right)
-        {
-            return (left._numerator * right._denominator, right._numerator * left._denominator);
-        }
+        private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
         {
