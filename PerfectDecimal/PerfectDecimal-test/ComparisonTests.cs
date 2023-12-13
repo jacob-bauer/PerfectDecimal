@@ -7,6 +7,79 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    internal class LessThanOrEqualTests()
+    {
+        [Test]
+        public void Negative_Both_Equals_Negative_Both()
+        {
+        }
+
+        [Test]
+        public void Positive_Equals_Positive()
+        {
+        }
+
+        [Test]
+        public void Negative_Numerator_Equals_Negative()
+        {
+        }
+
+        [Test]
+        public void Negative_Denominator_Equals_Negative_Numerator()
+        {
+        }
+
+        [Test]
+        public void Negative_Denominator_Equals_Negative_Denominator()
+        {
+        }
+
+        [Test]
+        public void Zero_Less_Than_Equal_Zero_True()
+        {
+        }
+
+        [Test]
+        public void Negative_Numerator_Less_Than_Negative_Numerator()
+        {
+        }
+
+        [Test]
+        public void Negative_Denominator_Less_Than_Positive()
+        {
+        }
+
+        [Test]
+        public void Negative_Denominator_Less_Than_Negative()
+        {
+        }
+
+        [Test]
+        public void Negative_Both_Less_Than_Negative_Both()
+        {
+        }
+
+        [Test]
+        public void Positive_Fraction_Less_Than_Whole()
+        {
+        }
+
+        [Test]
+        public void Negative_Less_Than_Zero()
+        {
+        }
+
+        [Test]
+        public void Positive_Not_Less_Than_Zero()
+        {
+        }
+
+        [Test]
+        public void Same_Opposite_Part_Signs_Equal()
+        {
+        }
+    }
+
     internal class GreaterThanOrEqualTests()
     {
         [Test]
