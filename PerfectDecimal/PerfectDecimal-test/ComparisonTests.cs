@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestPlatform.CrossPlatEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,41 +67,73 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Numerator_Less_Than_Negative_Numerator()
         {
+            PerfectDecimal subject = new(-3, 4);
+            PerfectDecimal test = new(-1, 2);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Denominator_Less_Than_Positive()
         {
+            PerfectDecimal subject = new(1, -8);
+            PerfectDecimal test = new(1, 328974);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Denominator_Less_Than_Negative()
         {
+            PerfectDecimal subject = new(408, -504);
+            PerfectDecimal test = new(-400, 600);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Both_Less_Than_Negative_Both()
         {
+            PerfectDecimal subject = new(-1, -2);
+            PerfectDecimal test = new(-1, -6);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Positive_Fraction_Less_Than_Whole()
         {
+            PerfectDecimal subject = new(1, 89798798);
+            PerfectDecimal test = new(1, 1);
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Negative_Less_Than_Zero()
         {
+            PerfectDecimal subject = new(-56, 3);
+            PerfectDecimal test = new();
+
+            Assert.That(subject <= test, Is.True);
         }
 
         [Test]
         public void Positive_Not_Less_Than_Zero()
         {
+            PerfectDecimal subject = new(43987, 23842398);
+            PerfectDecimal test = new();
+
+            Assert.That(subject <= test, Is.False);
         }
 
         [Test]
         public void Same_Opposite_Part_Signs_Equal()
         {
+            PerfectDecimal subject = new(-23423, 234327);
+            PerfectDecimal test = new(23423, -234327);
+
+            Assert.That(subject <= test, Is.True);
         }
     }
 
