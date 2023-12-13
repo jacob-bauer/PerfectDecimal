@@ -153,10 +153,27 @@ namespace ExtendedNumerics
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right)
         {
+            // If one of the denominators is negative, we need to make it positive while still maintaining the correct sign
+            // for the fraction. This is because if one of the denominators is negative, the opposite sides numerator will
+            // flip signs.
+
+            // We do that here instead of disallowing negative numerators, so that callers can choose to create fractions
+            // with negative numerators.
+
+            // Cases:
+            // Fraction is positive with two positive parts
+            // Fraction is negative with negative numerator and positive denominator
+            // --Fraction is negative with negative denominator and positive numerator
+            // --Fraction is positive with two negative parts.
+
+            // Since we cross multiply, we have to check both fractions
+
             BigInteger leftNumerator = left._numerator * right._denominator;
             BigInteger rightNumerator = right._numerator * left._denominator;
 
             return (leftNumerator, rightNumerator);
+
+
         }
     }
 }
