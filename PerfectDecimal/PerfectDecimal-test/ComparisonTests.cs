@@ -94,8 +94,8 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Both_Less_Than_Negative_Both()
         {
-            PerfectDecimal subject = new(-1, -2);
-            PerfectDecimal test = new(-1, -6);
+            PerfectDecimal subject = new(-1, -6);
+            PerfectDecimal test = new(-1, -2);
 
             Assert.That(subject <= test, Is.True);
         }
