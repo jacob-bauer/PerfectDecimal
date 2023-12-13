@@ -215,7 +215,7 @@ namespace PerfectDecimal_test
         public void Negative_Denominator_Greater_Than_Negative()
         {
             PerfectDecimal subject = new(1, -8);
-            PerfectDecimal test = new(-1, 7054);
+            PerfectDecimal test = new(-1, 6);
 
             Assert.That(subject >= test, Is.True);
         }
