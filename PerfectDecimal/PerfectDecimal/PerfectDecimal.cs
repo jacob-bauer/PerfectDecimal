@@ -105,10 +105,6 @@ namespace ExtendedNumerics
 
         public static bool operator <(PerfectDecimal left, PerfectDecimal right)
         {
-            var (leftNumerator, rightNumerator) = MakeLike(left, right);
-            return leftNumerator < rightNumerator;
-
-            // These changes need to take place before the call to make like
             BigInteger leftNumerator = left._numerator;
             BigInteger rightNumerator = right._numerator;
             BigInteger leftDenominator = left._denominator;
