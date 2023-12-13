@@ -223,5 +223,27 @@ namespace ExtendedNumerics
         {
             return (left._numerator * right._denominator, right._numerator * left._denominator);
         }
+
+        private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger leftNumerator = left._numerator;
+            BigInteger rightNumerator = right._numerator;
+            BigInteger leftDenominator = left._denominator;
+            BigInteger rightDenominator = right._denominator;
+
+            if (leftDenominator.Sign == -1)
+            {
+                leftNumerator = -leftNumerator;
+                leftDenominator = -leftDenominator;
+            }
+
+            if (rightDenominator.Sign == -1)
+            {
+                rightNumerator = -rightNumerator;
+                rightDenominator = -rightDenominator;
+            }
+
+            return (leftNumerator, rightNumerator, leftDenominator, rightDenominator);
+        }
     }
 }
