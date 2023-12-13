@@ -250,7 +250,7 @@ namespace PerfectDecimal_test
         [Test]
         public void Positive_Greater_Than_Zero()
         {
-            PerfectDecimal subject = new PerfectDecimal(1, 1000000);
+            PerfectDecimal subject = new(1, 1000000);
             PerfectDecimal test = new();
 
             Assert.That(subject >= test, Is.True);
@@ -418,7 +418,7 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Less_Than_Zero()
         {
-            PerfectDecimal subject = new PerfectDecimal(-1, 2);
+            PerfectDecimal subject = new(-1, 2);
             PerfectDecimal test = new();
 
             Assert.That(subject < test, Is.True);
