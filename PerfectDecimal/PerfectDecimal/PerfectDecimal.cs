@@ -153,10 +153,7 @@ namespace ExtendedNumerics
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right)
         {
-            BigInteger leftNumerator = left._numerator * right._denominator;
-            BigInteger rightNumerator = right._numerator * left._denominator;
-
-            return (leftNumerator, rightNumerator);
+            return (left._numerator * right._denominator, right._numerator * left._denominator);
         }
     }
 }
