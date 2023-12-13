@@ -2,10 +2,140 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    internal class GreaterThanOrEqualTests()
+    {
+        [Test]
+        public void Negative_Both_Equals_Negative_Both()
+        {
+            PerfectDecimal subject = new(-1, -2);
+            PerfectDecimal test = new(-2, -4);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Positive_Equals_Positive()
+        {
+            PerfectDecimal subject = new(7, 11);
+            PerfectDecimal test = new(14, 22);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Numerator_Equals_Negative()
+        {
+            PerfectDecimal subject = new(-1, 3);
+            PerfectDecimal test = new(-2, 6);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Denominator_Equals_Negative_Numerator()
+        {
+            PerfectDecimal subject = new(1, -800);
+            PerfectDecimal test = new(-1, 800);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Denominator_Equals_Negative_Denominator()
+        {
+            PerfectDecimal subject = new(8, -9);
+            PerfectDecimal test = new(8, -9);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Zero_Greater_Than_Equal_Zero_True()
+        {
+            PerfectDecimal subject = new();
+            PerfectDecimal test = new(0, 78);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Numerator_Greater_Than_Negative_Numerator()
+        {
+            PerfectDecimal subject = new(-1, 4);
+            PerfectDecimal test = new(-3, 4);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Denominator_Not_Greater_Than_Positive()
+        {
+            PerfectDecimal subject = new(1, -2);
+            PerfectDecimal test = new(1, 90);
+
+            Assert.That(subject >= test, Is.False);
+        }
+
+        [Test]
+        public void Negative_Denominator_Greater_Than_Negative()
+        {
+            PerfectDecimal subject = new(1, -8);
+            PerfectDecimal test = new(-1, 7054);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Both_Greater_Than_Negative_Both()
+        {
+            PerfectDecimal subject = new(-1, -3);
+            PerfectDecimal test = new(-9, -8);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Positive_Fraction_Greater_Than_Whole()
+        {
+            PerfectDecimal subject = new(4, 3);
+            PerfectDecimal test = new(1, 1);
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Not_Greater_Than_Zero()
+        {
+            PerfectDecimal subject = new(-1, 67);
+            PerfectDecimal test = new();
+
+            Assert.That(subject >= test, Is.False);
+        }
+
+        [Test]
+        public void Positive_Greater_Than_Zero()
+        {
+            PerfectDecimal subject = new PerfectDecimal(1, 1000000);
+            PerfectDecimal test = new();
+
+            Assert.That(subject >= test, Is.True);
+        }
+
+        [Test]
+        public void Same_Opposite_Part_Signs_Equal()
+        {
+            PerfectDecimal subject = new(-5, 6);
+            PerfectDecimal test = new(5, -6);
+
+            Assert.That(subject >= test, Is.True);
+        }
+    }
+
     internal class GreaterThanTests
     {
         [Test]
