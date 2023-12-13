@@ -6,6 +6,80 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    internal class GreaterThanTests
+    {
+        [Test]
+        public void Zero_Greater_Than_Zero_False()
+        {
+            PerfectDecimal subject = new();
+            PerfectDecimal test = new(0, 4);
+
+            Assert.That(subject < test, Is.False);
+        }
+
+        [Test]
+        public void Negative_Numerator_Less_Than_Negative()
+        {
+            PerfectDecimal subject = new(-1, 2);
+            PerfectDecimal test = new(-1, 4);
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Denominator_Less_Than_Positive()
+        {
+            PerfectDecimal subject = new(1, -2);
+            PerfectDecimal test = new(1, 4);
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Denominator_Less_Than_Negative()
+        {
+            PerfectDecimal subject = new(1, -2);
+            PerfectDecimal test = new(1, -4);
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Both_Less_Than_Negative_Both()
+        {
+            PerfectDecimal subject = new(-1, -2);
+            PerfectDecimal test = new(-1, -4);
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Positive_Fraction_Smaller_Than_Whole()
+        {
+            PerfectDecimal subject = new(1, 7);
+            PerfectDecimal test = new(4, 9);
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Negative_Less_Than_Zero()
+        {
+            PerfectDecimal subject = new PerfectDecimal(-1, 2);
+            PerfectDecimal test = new();
+
+            Assert.That(subject < test, Is.True);
+        }
+
+        [Test]
+        public void Positive_Not_Less_Than_Zero()
+        {
+            PerfectDecimal subject = new(1, 7);
+            PerfectDecimal test = new();
+
+            Assert.That(subject < test, Is.False);
+        }
+    }
     internal class IComparableOfTTests
     {
         [Test]
@@ -125,7 +199,7 @@ namespace PerfectDecimal_test
             PerfectDecimal subject = new();
             PerfectDecimal? test = null;
 
-            Assert.That(subject.CompareTo((object)test), Is.EqualTo(1));
+            Assert.That(subject.CompareTo((object)test!), Is.EqualTo(1));
         }
 
         [Test]
