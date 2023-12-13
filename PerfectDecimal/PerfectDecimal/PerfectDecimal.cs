@@ -168,12 +168,14 @@ namespace ExtendedNumerics
 
             // Since we cross multiply, we have to check both fractions
 
-            BigInteger leftNumerator = left._numerator * right._denominator;
-            BigInteger rightNumerator = right._numerator * left._denominator;
+            BigInteger leftNumerator = left._numerator;
+            BigInteger rightNumerator = right._numerator;
+            BigInteger leftDenominator = left._denominator;
+            BigInteger rightDenominator = right._denominator;
 
-            return (leftNumerator, rightNumerator);
 
 
+            return (leftNumerator * rightDenominator, rightNumerator * leftDenominator);
         }
     }
 }
