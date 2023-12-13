@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    // Cannot use ComparisonConstraint since it just calls the IEquatable interface and I need to actually call the comparison operators.
+#pragma warning disable NUnit2043 // Use ComparisonConstraint for better assertion messages in case of failure
     internal class LessThanOrEqualTests()
     {
         [Test]
@@ -16,7 +18,9 @@ namespace PerfectDecimal_test
             PerfectDecimal subject = new(-3, -6);
             PerfectDecimal test = new(-6, -12);
 
+
             Assert.That(subject <= test, Is.True);
+
         }
 
         [Test]
@@ -250,7 +254,7 @@ namespace PerfectDecimal_test
         [Test]
         public void Positive_Greater_Than_Zero()
         {
-            PerfectDecimal subject = new PerfectDecimal(1, 1000000);
+            PerfectDecimal subject = new(1, 1000000);
             PerfectDecimal test = new();
 
             Assert.That(subject >= test, Is.True);
@@ -418,7 +422,7 @@ namespace PerfectDecimal_test
         [Test]
         public void Negative_Less_Than_Zero()
         {
-            PerfectDecimal subject = new PerfectDecimal(-1, 2);
+            PerfectDecimal subject = new(-1, 2);
             PerfectDecimal test = new();
 
             Assert.That(subject < test, Is.True);
@@ -433,6 +437,7 @@ namespace PerfectDecimal_test
             Assert.That(subject < test, Is.False);
         }
     }
+#pragma warning restore NUnit2043 // Use ComparisonConstraint for better assertion messages in case of failure
 
     internal class IComparableOfTTests
     {
