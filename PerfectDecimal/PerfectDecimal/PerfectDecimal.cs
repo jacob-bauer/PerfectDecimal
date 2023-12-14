@@ -17,9 +17,11 @@ namespace ExtendedNumerics
             _denominator = BigInteger.One;
         }
 
-        public PerfectDecimal(int numerator, int denominator)
+        public PerfectDecimal(int numerator, int denominator) : this(new BigInteger(numerator), new BigInteger(denominator)) { }
+
+        public PerfectDecimal(BigInteger numerator, BigInteger denominator)
         {
-            if (denominator == 0)
+            if (denominator == BigInteger.Zero)
             {
                 string message = $"{nameof(denominator)} is zero."
                                + $" A {nameof(PerfectDecimal)} is a fraction of the form numerator / denominator."
@@ -31,8 +33,8 @@ namespace ExtendedNumerics
 
             else
             {
-                _numerator = new BigInteger(numerator);
-                _denominator = new BigInteger(denominator);
+                _numerator = numerator;
+                _denominator = denominator;
             }
         }
 
@@ -145,7 +147,27 @@ namespace ExtendedNumerics
                 return false;
         }
 
-        public static implicit operator PerfectDecimal(sbyte value) => new PerfectDecimal(value, BigInteger.One);
+        public static implicit operator PerfectDecimal(sbyte value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(byte value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(short value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(ushort value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(int value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(uint value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(long value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(ulong value) => new(new BigInteger(value), BigInteger.One);
+
+        public static implicit operator PerfectDecimal(Int128 value) => new((BigInteger)value, BigInteger.One);
+
+        public static implicit operator PerfectDecimal(UInt128 value) => new((BigInteger)value, BigInteger.One);
+
+        public static implicit operator PerfectDecimal(BigInteger value) => new(value, BigInteger.One);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
