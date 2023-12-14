@@ -169,6 +169,19 @@ namespace ExtendedNumerics
 
         public static implicit operator PerfectDecimal(BigInteger value) => new(value, BigInteger.One);
 
+        public static implicit operator PerfectDecimal(decimal value)
+        {
+            // There are two methods I can use to do this.
+            // (1) I can figure what power of ten to multiply value by to get an integer and then build a BigInteger out of that.
+            //          This method is significantly faster, but I'd have to figure out a robust way to figure when it would overflow.
+            //        
+            // (2) I can convert the value to a string, then remove the decimal point and build a BigInteger.
+            //          This method is slower, but much easier to implement and I'd have to implement it anyway as a backup for when the mathematical method would overflow.
+            //              I think that means that I build this method first
+
+
+        }
+
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
