@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Globalization;
+using System.Numerics;
 
 namespace ExtendedNumerics
 {
@@ -178,8 +179,20 @@ namespace ExtendedNumerics
             // (2) I can convert the value to a string, then remove the decimal point and build a BigInteger.
             //          This method is slower, but much easier to implement and I'd have to implement it anyway as a backup for when the mathematical method would overflow.
             //              I think that means that I build this method first
+            //              https://stackoverflow.com/questions/21310442/produce-a-round-trip-string-for-a-decimal-type
+            //                  ^^Has code for a generic string conversion method^^
 
+            string valueText = value.ToString(CultureInfo.InvariantCulture);
+            int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
+            int lengthAfterSeparator = valueText.Length - separatorIndex;
 
+            if (lengthAfterSeparator > valueText.Length) // There was a separator
+                valueText = valueText.Remove(separatorIndex);
+
+            BigInteger numerator = BigInteger.Parse(valueText, CultureInfo.InvariantCulture);
+            BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
+
+            return new PerfectDecimal(numerator, denominator);
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
