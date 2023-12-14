@@ -177,7 +177,7 @@ namespace ExtendedNumerics
             //          This method is significantly faster, but I'd have to figure out a robust way to figure when it would overflow.
             //        
             // (2) I can convert the value to a string, then remove the decimal point and build a BigInteger.
-            //          This method is slower, but much easier to implement and I'd have to implement it anyway as a backup for when the mathematical method would overflow.
+            //          This method is slower, but much easier to implement and I'd have to implement it anyway as a backup for when the arithmetic method would overflow.
             //              I think that means that I build this method first
             //              https://stackoverflow.com/questions/21310442/produce-a-round-trip-string-for-a-decimal-type
             //                  ^^Has code for a generic string conversion method^^
