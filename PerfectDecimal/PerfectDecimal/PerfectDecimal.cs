@@ -145,6 +145,8 @@ namespace ExtendedNumerics
                 return false;
         }
 
+        public static implicit operator PerfectDecimal(sbyte value) => new PerfectDecimal(value, BigInteger.One);
+
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
