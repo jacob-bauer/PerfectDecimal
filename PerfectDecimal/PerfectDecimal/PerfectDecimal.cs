@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace ExtendedNumerics
 {
@@ -170,57 +171,33 @@ namespace ExtendedNumerics
 
         public static implicit operator PerfectDecimal(BigInteger value) => new(value, BigInteger.One);
 
-        public static implicit operator PerfectDecimal(decimal value)
+        public static implicit operator PerfectDecimal(decimal value) => ConvertFloatingPoint<decimal>(value);
+
+        public static explicit operator PerfectDecimal(Half value) => ConvertFloatingPoint<Half>(value);
+
+        public static explicit operator PerfectDecimal(float value) => ConvertFloatingPoint<float>(value);
+
+        public static explicit operator PerfectDecimal(double value) => ConvertFloatingPoint<double>(value);
+
+        private static PerfectDecimal ConvertFloatingPoint<T>(T value) where T : INumberBase<T>, IFormattable
         {
-            // There are two methods I can use to do this.
-            // (1) I can figure what power of ten to multiply value by to get an integer and then build a BigInteger out of that.
-            //          This method is significantly faster, but I'd have to figure out a robust way to figure when it would overflow.
-            //        
-            // (2) I can convert the value to a string, then remove the decimal point and build a BigInteger.
-            //          This method is slower, but much easier to implement and I'd have to implement it anyway as a backup for when the arithmetic method would overflow.
-            //              I think that means that I build this method first
-            //              https://stackoverflow.com/questions/21310442/produce-a-round-trip-string-for-a-decimal-type
-            //                  ^^Has code for a generic string conversion method^^
-
-            string valueText = value.ToString(CultureInfo.InvariantCulture);
-            int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
-            int lengthAfterSeparator = valueText.Length - separatorIndex;
-
-            if (lengthAfterSeparator > valueText.Length) // There was a separator
-                valueText = valueText.Remove(separatorIndex);
-
-            BigInteger numerator = BigInteger.Parse(valueText, CultureInfo.InvariantCulture);
-            BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
-
-            return new PerfectDecimal(numerator, denominator);
-        }
-
-        public static explicit operator PerfectDecimal(Half value) => (PerfectDecimal)(double)value;
-
-        public static explicit operator PerfectDecimal(float value) => (PerfectDecimal)(double)value;
-
-        public static explicit operator PerfectDecimal(double value)
-        {
-            // If this is negative infinity, NaN, or infinity, throw an exception
-            // All special cases: System.OverflowException: 'Value was either too large or too small for a Decimal.'
-
-            if (double.IsNaN(value) || double.IsInfinity(value))
+            if (T.IsNaN(value) || T.IsInfinity(value))
                 throw new OverflowException($"{nameof(value)} was either too large or too small for a {nameof(PerfectDecimal)}");
 
             else
             {
-                string valueText = value.ToString(CultureInfo.InvariantCulture);
+                string valueText = value.ToString("R", CultureInfo.InvariantCulture);
                 int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
                 int lengthAfterSeparator = valueText.Length - separatorIndex;
 
-                if (lengthAfterSeparator > valueText.Length) // There was a separator
+                if (lengthAfterSeparator > valueText.Length) // there was a separator
                     valueText = valueText.Remove(separatorIndex);
 
                 BigInteger numerator = BigInteger.Parse(valueText, CultureInfo.InvariantCulture);
                 BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
 
                 return new PerfectDecimal(numerator, denominator);
-            }
+            }    
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
