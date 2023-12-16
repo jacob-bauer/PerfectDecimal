@@ -195,19 +195,32 @@ namespace ExtendedNumerics
             return new PerfectDecimal(numerator, denominator);
         }
 
-        public static explicit operator PerfectDecimal(Half value)
-        {
+        public static explicit operator PerfectDecimal(Half value) => (PerfectDecimal)(double)value;
 
-        }
-
-        public static explicit operator PerfectDecimal(float value)
-        {
-
-        }
+        public static explicit operator PerfectDecimal(float value) => (PerfectDecimal)(double)value;
 
         public static explicit operator PerfectDecimal(double value)
         {
+            // If this is negative infinity, NaN, or infinity, throw an exception
+            // All special cases: System.OverflowException: 'Value was either too large or too small for a Decimal.'
 
+            if (double.IsNaN(value) || double.IsInfinity(value))
+                throw new OverflowException($"{nameof(value)} was either too large or too small for a {nameof(PerfectDecimal)}");
+
+            else
+            {
+                string valueText = value.ToString(CultureInfo.InvariantCulture);
+                int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
+                int lengthAfterSeparator = valueText.Length - separatorIndex;
+
+                if (lengthAfterSeparator > valueText.Length) // There was a separator
+                    valueText = valueText.Remove(separatorIndex);
+
+                BigInteger numerator = BigInteger.Parse(valueText, CultureInfo.InvariantCulture);
+                BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
+
+                return new PerfectDecimal(numerator, denominator);
+            }
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
