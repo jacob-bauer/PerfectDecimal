@@ -181,10 +181,7 @@ namespace ExtendedNumerics
 
         private static PerfectDecimal ConvertFloatingPoint<T>(T value) where T : INumberBase<T>, IFormattable
         {
-            if (T.IsNaN(value) || T.IsInfinity(value))
-                throw new OverflowException($"{nameof(value)} was either too large or too small for a {nameof(PerfectDecimal)}");
-
-            else
+            if (T.IsNormal(value))
             {
                 string valueText = value.ToString("R", CultureInfo.InvariantCulture);
                 int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
@@ -197,7 +194,10 @@ namespace ExtendedNumerics
                 BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
 
                 return new PerfectDecimal(numerator, denominator);
-            }    
+            }         
+
+            else
+                throw new OverflowException($"{nameof(value)} was either too large or too small for a {nameof(PerfectDecimal)}");
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
