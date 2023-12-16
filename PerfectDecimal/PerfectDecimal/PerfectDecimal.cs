@@ -181,6 +181,7 @@ namespace ExtendedNumerics
 
         private static PerfectDecimal ConvertFloatingPoint<T>(T value) where T : INumberBase<T>, IFormattable
         {
+            // Need another commit
             if (T.IsNormal(value))
             {
                 string valueText = value.ToString("R", CultureInfo.InvariantCulture);
