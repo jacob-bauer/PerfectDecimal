@@ -195,6 +195,21 @@ namespace ExtendedNumerics
             return new PerfectDecimal(numerator, denominator);
         }
 
+        public static explicit operator PerfectDecimal(Half value)
+        {
+
+        }
+
+        public static explicit operator PerfectDecimal(float value)
+        {
+
+        }
+
+        public static explicit operator PerfectDecimal(double value)
+        {
+
+        }
+
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
