@@ -16,6 +16,8 @@ namespace ExtendedNumerics
         private BigInteger _numerator;
         private BigInteger _denominator;
 
+        private PerfectDecimal _recipricol { get => new PerfectDecimal(_denominator, _numerator); }
+
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
         public static PerfectDecimal Zero { get => new PerfectDecimal(); }
