@@ -171,36 +171,6 @@ namespace ExtendedNumerics
 
         public static implicit operator PerfectDecimal(BigInteger value) => new(value, BigInteger.One);
 
-        public static implicit operator PerfectDecimal(decimal value) => ConvertFloatingPoint<decimal>(value);
-
-        public static explicit operator PerfectDecimal(Half value) => ConvertFloatingPoint<Half>(value);
-
-        public static explicit operator PerfectDecimal(float value) => ConvertFloatingPoint<float>(value);
-
-        public static explicit operator PerfectDecimal(double value) => ConvertFloatingPoint<double>(value);
-
-        private static PerfectDecimal ConvertFloatingPoint<T>(T value) where T : INumberBase<T>, IFormattable
-        {
-            // Need another commit
-            if (T.IsNormal(value))
-            {
-                string valueText = value.ToString("R", CultureInfo.InvariantCulture);
-                int separatorIndex = valueText.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator);
-                int lengthAfterSeparator = valueText.Length - separatorIndex;
-
-                if (lengthAfterSeparator > valueText.Length) // there was a separator
-                    valueText = valueText.Remove(separatorIndex);
-
-                BigInteger numerator = BigInteger.Parse(valueText, CultureInfo.InvariantCulture);
-                BigInteger denominator = BigInteger.Pow(10, lengthAfterSeparator);
-
-                return new PerfectDecimal(numerator, denominator);
-            }         
-
-            else
-                throw new OverflowException($"{nameof(value)} was either too large or too small for a {nameof(PerfectDecimal)}");
-        }
-
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator, BigInteger leftDenominator, BigInteger rightDenominator) MassageFractionSigns(PerfectDecimal left, PerfectDecimal right)
