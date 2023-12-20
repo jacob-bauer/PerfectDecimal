@@ -18,6 +18,7 @@ namespace ExtendedNumerics
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
 
+
         public PerfectDecimal()
         {
             _numerator = BigInteger.Zero;

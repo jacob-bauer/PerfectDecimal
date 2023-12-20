@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    internal class AdditiveIdentityTests
+    {
+        [Test]
+        public void Additive_Identity_Returns_Zero()
+        {
+            Assert.That(PerfectDecimal.AdditiveIdentity, Is.EqualTo(new PerfectDecimal()));
+        }
+    }
+
     internal class AdditionTests
     {
-        // Test cases for this are
-        // --0 + 0
-        // --(-/-)+(-/-)
-        // --(-/+)+(-/+)
-        // --(+/-)+(+/-)
-        // --(+/+)+(+/+)
-        // --(+/-)+(-/+)
-        // (+/+)+(-/-)
-
         [Test]
         public void Zero_Zero()
         {
