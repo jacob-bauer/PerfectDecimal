@@ -11,7 +11,7 @@ namespace ExtendedNumerics
                                   IEquatable<PerfectDecimal>,
                                   IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IAdditiveIdentity<PerfectDecimal, PerfectDecimal>,
-                                  IDivisionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
+                                  IDivisionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IMultiplyOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IMultiplicativeIdentity<PerfectDecimal, PerfectDecimal>
     {
