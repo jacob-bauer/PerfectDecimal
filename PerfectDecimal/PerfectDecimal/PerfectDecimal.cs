@@ -9,10 +9,15 @@ namespace ExtendedNumerics
                                   IComparisonOperators<PerfectDecimal, PerfectDecimal, bool>,
                                   IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
                                   IEquatable<PerfectDecimal>,
-                                  IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
+                                  IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
+                                  IAdditiveIdentity<PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
+
+
+        public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
+
 
         public PerfectDecimal()
         {
