@@ -25,9 +25,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(-1, -1);
             PerfectDecimal right = new(-1, -4);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(-5, -4)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(1, 4)));
         }
 
         [Test]
@@ -36,9 +36,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(-3, 4);
             PerfectDecimal right = new(-4, 4);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(-7, 4)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(3, 4)));
         }
 
         [Test]
@@ -47,9 +47,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(5, -7);
             PerfectDecimal right = new(13, -9);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(-136, 63)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(65, 63)));
         }
 
         [Test]
@@ -58,9 +58,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(3, 6);
             PerfectDecimal right = new(1, 4);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(3, 4)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(1, 8)));
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(1, -3);
             PerfectDecimal right = new(-1, 3);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(-2, 3)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(1, 9)));
         }
 
         [Test]
@@ -80,9 +80,9 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new(1, 4);
             PerfectDecimal right = new(-2, -3);
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
-            Assert.That(subject, Is.EqualTo(new PerfectDecimal(-11, -12)));
+            Assert.That(subject, Is.EqualTo(new PerfectDecimal(1, 6)));
         }
     }
 }
