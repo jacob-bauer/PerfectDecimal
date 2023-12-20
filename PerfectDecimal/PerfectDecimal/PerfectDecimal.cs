@@ -193,7 +193,14 @@ namespace ExtendedNumerics
 
         public static PerfectDecimal operator /(PerfectDecimal left, PerfectDecimal right)
         {
+            if (right == Zero)
+                throw new DivideByZeroException("Attempted to divide by zero.");
 
+            else if (left == Zero)
+                return Zero;
+
+            else
+                return left * right._recipricol;
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
