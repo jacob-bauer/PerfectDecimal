@@ -8,7 +8,8 @@ namespace ExtendedNumerics
                                   IComparable<PerfectDecimal>,
                                   IComparisonOperators<PerfectDecimal, PerfectDecimal, bool>,
                                   IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
-                                  IEquatable<PerfectDecimal>
+                                  IEquatable<PerfectDecimal>,
+                                  IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -170,6 +171,16 @@ namespace ExtendedNumerics
         public static implicit operator PerfectDecimal(UInt128 value) => new((BigInteger)value, BigInteger.One);
 
         public static implicit operator PerfectDecimal(BigInteger value) => new(value, BigInteger.One);
+
+        public static PerfectDecimal operator +(PerfectDecimal left, PerfectDecimal right)
+        {
+            var likeNumerators = MakeLike(left, right);
+
+            BigInteger numerator = likeNumerators.leftNumerator + likeNumerators.rightNumerator;
+            BigInteger denominator = left._denominator * right._denominator;
+
+            return new PerfectDecimal(numerator, denominator);
+        }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
 
