@@ -11,13 +11,15 @@ namespace ExtendedNumerics
                                   IEquatable<PerfectDecimal>,
                                   IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IAdditiveIdentity<PerfectDecimal, PerfectDecimal>,
-                                  IMultiplyOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
+                                  IMultiplyOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
+                                  IMultiplicativeIdentity<PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
 
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
+        public static PerfectDecimal MultiplicativeIdentity { get => new PerfectDecimal(1, 1); }
 
 
         public PerfectDecimal()

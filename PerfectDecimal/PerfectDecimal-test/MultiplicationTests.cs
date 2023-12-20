@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
+    internal class MultiplicativeIdentityTests
+    {
+        [Test]
+        public void Multiplicative_Identity_Is_One()
+        {
+            PerfectDecimal test = new PerfectDecimal(1, 1);
+
+            Assert.That(PerfectDecimal.MultiplicativeIdentity, Is.EqualTo(test));
+        }
+    }
+
     internal class MultiplicationTests
     {
         [Test]
