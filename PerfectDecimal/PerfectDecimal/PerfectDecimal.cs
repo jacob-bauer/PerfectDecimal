@@ -10,13 +10,15 @@ namespace ExtendedNumerics
                                   IEqualityOperators<PerfectDecimal, PerfectDecimal, bool>,
                                   IEquatable<PerfectDecimal>,
                                   IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
-                                  IAdditiveIdentity<PerfectDecimal, PerfectDecimal>
+                                  IAdditiveIdentity<PerfectDecimal, PerfectDecimal>,
+                                  IDivisionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
 
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
+        public static PerfectDecimal Zero { get => new PerfectDecimal(); }
 
 
         public PerfectDecimal()
@@ -185,6 +187,11 @@ namespace ExtendedNumerics
             BigInteger denominator = left._denominator * right._denominator;
 
             return new PerfectDecimal(numerator, denominator);
+        }
+
+        public static PerfectDecimal operator /(PerfectDecimal left, PerfectDecimal right)
+        {
+
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
