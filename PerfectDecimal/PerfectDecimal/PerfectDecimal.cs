@@ -11,14 +11,18 @@ namespace ExtendedNumerics
                                   IEquatable<PerfectDecimal>,
                                   IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IAdditiveIdentity<PerfectDecimal, PerfectDecimal>,
+                                  IDivisionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IMultiplyOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IMultiplicativeIdentity<PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
 
+        private PerfectDecimal _recipricol { get => new PerfectDecimal(_denominator, _numerator); }
+
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
+        public static PerfectDecimal Zero { get => new PerfectDecimal(); }
         public static PerfectDecimal MultiplicativeIdentity { get => new PerfectDecimal(1, 1); }
 
 
@@ -189,6 +193,18 @@ namespace ExtendedNumerics
 
             return new PerfectDecimal(numerator, denominator);
         }
+
+        public static PerfectDecimal operator /(PerfectDecimal left, PerfectDecimal right)
+        {
+            if (right == Zero)
+                throw new DivideByZeroException("Attempted to divide by zero.");
+
+            else if (left == Zero)
+                return Zero;
+
+            else
+                return left * right._recipricol;
+		}
 
         public static PerfectDecimal operator *(PerfectDecimal left, PerfectDecimal right)
         {
