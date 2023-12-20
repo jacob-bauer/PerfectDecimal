@@ -12,6 +12,8 @@ namespace ExtendedNumerics
                                   IAdditionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
                                   IAdditiveIdentity<PerfectDecimal, PerfectDecimal>,
                                   IDivisionOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>
+                                  IMultiplyOperators<PerfectDecimal, PerfectDecimal, PerfectDecimal>,
+                                  IMultiplicativeIdentity<PerfectDecimal, PerfectDecimal>
     {
         private BigInteger _numerator;
         private BigInteger _denominator;
@@ -21,6 +23,7 @@ namespace ExtendedNumerics
 
         public static PerfectDecimal AdditiveIdentity { get => new PerfectDecimal(); }
         public static PerfectDecimal Zero { get => new PerfectDecimal(); }
+        public static PerfectDecimal MultiplicativeIdentity { get => new PerfectDecimal(1, 1); }
 
 
         public PerfectDecimal()
@@ -201,6 +204,14 @@ namespace ExtendedNumerics
 
             else
                 return left * right._recipricol;
+		}
+
+        public static PerfectDecimal operator *(PerfectDecimal left, PerfectDecimal right)
+        {
+            BigInteger numerator = left._numerator * right._numerator;
+            BigInteger denominator = left._denominator * right._denominator;
+
+            return new PerfectDecimal(numerator, denominator);
         }
 
         private static (BigInteger leftNumerator, BigInteger rightNumerator) MakeLike(PerfectDecimal left,  PerfectDecimal right) => (left._numerator * right._denominator, right._numerator * left._denominator);
