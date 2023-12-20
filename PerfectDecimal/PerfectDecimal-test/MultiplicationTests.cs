@@ -6,16 +6,7 @@ using System.Threading.Tasks;
 
 namespace PerfectDecimal_test
 {
-    internal class AdditiveIdentityTests
-    {
-        [Test]
-        public void Additive_Identity_Returns_Zero()
-        {
-            Assert.That(PerfectDecimal.AdditiveIdentity, Is.EqualTo(new PerfectDecimal()));
-        }
-    }
-
-    internal class AdditionTests
+    internal class MultiplicationTests
     {
         [Test]
         public void Zero_Zero()
@@ -23,7 +14,7 @@ namespace PerfectDecimal_test
             PerfectDecimal left = new();
             PerfectDecimal right = new();
 
-            PerfectDecimal subject = left + right;
+            PerfectDecimal subject = left * right;
 
             Assert.That(subject, Is.EqualTo(new PerfectDecimal()));
         }
